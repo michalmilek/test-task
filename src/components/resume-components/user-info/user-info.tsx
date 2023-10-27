@@ -1,7 +1,24 @@
-import { Box, Button, Flex, Icon, Image, Link, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Icon,
+  Image,
+  Link,
+  Spacer,
+  Text,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import { RepositoryInfoResponse, UserResponse } from "../../../utils/types";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
+import Chart from "./chart";
+import Example from "./chart";
+
+export interface Repository {
+  size: number;
+  language: string;
+}
 
 const UserInfo = ({
   user,
@@ -10,6 +27,7 @@ const UserInfo = ({
   user: UserResponse;
   repos: RepositoryInfoResponse[];
 }) => {
+  const [isLargerThan600] = useMediaQuery("(min-width: 600px)");
   const {
     name,
     created_at,
@@ -35,13 +53,11 @@ const UserInfo = ({
 
     data.forEach((repo) => {
       totalSize += repo.size;
-      if (languageSizes.has(repo.language)) {
-        languageSizes.set(
-          repo.language,
-          languageSizes.get(repo.language)! + repo.size
-        );
+      const language = repo.language || "Unrecognized";
+      if (languageSizes.has(language)) {
+        languageSizes.set(language, languageSizes.get(language)! + repo.size);
       } else {
-        languageSizes.set(repo.language, repo.size);
+        languageSizes.set(language, repo.size);
       }
     });
 
@@ -51,18 +67,26 @@ const UserInfo = ({
       aggregatedData.push({ size: percentage, language });
     });
 
+    aggregatedData.sort((a, b) => b.size - a.size);
+
     return aggregatedData;
   };
 
   return (
-    <Box
+    <Flex
+      w={"full"}
+      alignItems={"center"}
+      justifyContent={"center"}
+      flexDirection={isLargerThan600 ? "row" : "column"}
+      gap={isLargerThan600 ? 8 : 2}
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
-      p={4}>
+      p={{ base: 8, lg: 4 }}>
       <Flex
+        flexDirection={"column"}
         alignItems="center"
-        gap={"8"}
+        gap={isLargerThan600 ? "8" : "2"}
         mb={4}>
         <Image
           src={avatar_url}
@@ -71,53 +95,57 @@ const UserInfo = ({
           border={"2px solid"}
           borderColor={"gray.400"}
           shadow={"xl"}
-          boxSize="150px"
+          boxSize={{ base: "100px", lg: "150px" }}
           mr={2}
         />
         <Link
           href={html_url}
           isExternal
-          fontSize="5xl">
+          fontSize={{ sm: "2xl", lg: "5xl" }}>
           {login}
         </Link>
-      </Flex>
-      {name && (
+
+        {name && (
+          <Text
+            fontWeight="bold"
+            fontSize={"lg"}
+            mb={2}>
+            {name}
+          </Text>
+        )}
         <Text
-          fontWeight="bold"
-          fontSize={"lg"}
+          fontSize={"md"}
           mb={2}>
-          {name}
+          Joined on {new Date(created_at).toLocaleDateString(i18n.language)}
         </Text>
-      )}
-      <Text
-        fontSize={"md"}
-        mb={2}>
-        Joined on {new Date(created_at).toLocaleDateString(i18n.language)}
-      </Text>
-      <Flex>
-        <Link
-          href={html_url}
-          isExternal
-          mr={4}>
-          <Button colorScheme="gray">GitHub</Button>
-        </Link>
-        {twitter_username && (
+        <Flex
+          flexDirection={{ base: "row", md: "column", lg: "row" }}
+          gap={4}
+          alignItems={"center"}
+          justifyContent={"center"}>
           <Link
-            href={`https://twitter.com/${twitter_username}`}
+            href={html_url}
             isExternal>
-            <Button colorScheme="twitter">Twitter</Button>
+            <Button colorScheme="gray">GitHub</Button>
           </Link>
-        )}
-        {blog && (
-          <Link
-            href={blog}
-            isExternal
-            ml={4}>
-            <Button colorScheme="blue">Portfolio</Button>
-          </Link>
-        )}
+          {twitter_username && (
+            <Link
+              href={`https://twitter.com/${twitter_username}`}
+              isExternal>
+              <Button colorScheme="twitter">Twitter</Button>
+            </Link>
+          )}
+          {blog && (
+            <Link
+              href={blog}
+              isExternal>
+              <Button colorScheme="blue">Portfolio</Button>
+            </Link>
+          )}
+        </Flex>
       </Flex>
-    </Box>
+      {data.length > 0 && <Example data={data} />}
+    </Flex>
   );
 };
 
