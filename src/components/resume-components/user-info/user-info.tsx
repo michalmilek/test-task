@@ -1,19 +1,16 @@
 import {
-  Box,
   Button,
   Flex,
-  Icon,
+  Heading,
   Image,
-  Link,
-  Spacer,
   Text,
   useMediaQuery,
 } from "@chakra-ui/react";
 import { RepositoryInfoResponse, UserResponse } from "../../../utils/types";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import Chart from "./chart";
 import Example from "./chart";
+import Link from "../../ui/link";
 
 export interface Repository {
   size: number;
@@ -99,19 +96,20 @@ const UserInfo = ({
           mr={2}
         />
         <Link
-          href={html_url}
+          to={html_url}
           isExternal
           fontSize={{ sm: "2xl", lg: "5xl" }}>
           {login}
         </Link>
 
         {name && (
-          <Text
+          <Heading
+            as={"h2"}
             fontWeight="bold"
             fontSize={"lg"}
             mb={2}>
             {name}
-          </Text>
+          </Heading>
         )}
         <Text
           fontSize={"md"}
@@ -124,22 +122,34 @@ const UserInfo = ({
           alignItems={"center"}
           justifyContent={"center"}>
           <Link
-            href={html_url}
+            to={html_url}
             isExternal>
-            <Button colorScheme="gray">GitHub</Button>
+            <Button
+              tabIndex={-1}
+              colorScheme="gray">
+              GitHub
+            </Button>
           </Link>
           {twitter_username && (
             <Link
-              href={`https://twitter.com/${twitter_username}`}
+              to={`https://twitter.com/${twitter_username}`}
               isExternal>
-              <Button colorScheme="twitter">Twitter</Button>
+              <Button
+                tabIndex={-1}
+                colorScheme="twitter">
+                Twitter
+              </Button>
             </Link>
           )}
           {blog && (
             <Link
-              href={blog}
+              to={blog}
               isExternal>
-              <Button colorScheme="blue">Portfolio</Button>
+              <Button
+                tabIndex={-1}
+                colorScheme="blue">
+                Portfolio
+              </Button>
             </Link>
           )}
         </Flex>

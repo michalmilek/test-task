@@ -10,6 +10,7 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import Button from "./ui/button";
 import { Language } from "../utils/types";
 import { useNavigate } from "react-router-dom";
+import Breadcrumbs from "./breadcrumbs";
 
 function Header() {
   const navigate = useNavigate();
@@ -28,11 +29,16 @@ function Header() {
       bg={bgColor}
       shadow={"md"}
       p={4}>
-      <ChakraButton
-        onClick={() => navigate(-1)}
-        leftIcon={<ArrowBackIcon fontSize={"2xl"} />}>
-        Back
-      </ChakraButton>
+      <Flex
+        gap={4}
+        alignItems={"center"}>
+        <ChakraButton
+          onClick={() => navigate(-1)}
+          leftIcon={<ArrowBackIcon fontSize={"2xl"} />}>
+          Back
+        </ChakraButton>
+        <Breadcrumbs />
+      </Flex>
       <Spacer />
       <Flex gap={"2"}>
         <ChakraButton

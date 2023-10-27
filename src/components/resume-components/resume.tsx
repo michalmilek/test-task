@@ -4,11 +4,13 @@ import { useGetUserAuto, useGetUserRepos } from "../../services/userServices";
 import UserInfo from "./user-info/user-info";
 import Chart from "./user-info/chart";
 import Example from "./user-info/chart";
+import RepoList from "./repo-list/repo-list";
 
 const ResumeComponent = () => {
   const { username } = useParams();
   const { data: user } = useGetUserAuto(username);
   const { data: repos } = useGetUserRepos(username);
+  console.log("🚀 ~ repos:", repos);
 
   if (user && repos) {
     return (
@@ -17,6 +19,7 @@ const ResumeComponent = () => {
           repos={repos}
           user={user}
         />
+        <RepoList repos={repos} />
       </div>
     );
   }

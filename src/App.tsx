@@ -6,24 +6,24 @@ import theme from "./theme/theme";
 import { Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import useDynamicTitle from "./hooks/useDynamicTitle";
 
 const queryClient = new QueryClient();
 
 function App() {
+  useDynamicTitle();
   return (
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={theme}>
-        <BrowserRouter>
-          <Routes>
-            {routes.map((route) => (
-              <Route
-                key={route.path}
-                path={route.path}
-                element={route.component}
-              />
-            ))}
-          </Routes>
-        </BrowserRouter>
+        <Routes>
+          {routes.map((route) => (
+            <Route
+              key={route.path}
+              path={route.path}
+              element={route.component}
+            />
+          ))}
+        </Routes>
       </ChakraProvider>
       <ReactQueryDevtools />
     </QueryClientProvider>
@@ -33,7 +33,9 @@ function App() {
 const SuspenseApp = () => {
   return (
     <Suspense fallback="loading">
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Suspense>
   );
 };
