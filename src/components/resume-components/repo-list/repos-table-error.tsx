@@ -1,7 +1,8 @@
 import { Box, Text } from "@chakra-ui/react";
-import React from "react";
+import { useTranslation } from "react-i18next";
 
 const ReposTableError = () => {
+  const { t } = useTranslation();
   return (
     <Box
       display={"flex"}
@@ -11,8 +12,8 @@ const ReposTableError = () => {
       h={"300px"}>
       <Text
         color="red.500"
-        fontSize="xl">
-        Error during fetching repositories.
+        fontSize={{ base: "xl", sm: "2xl" }}>
+        {t("error.repositories")}
       </Text>
     </Box>
   );

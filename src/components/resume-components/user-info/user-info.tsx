@@ -1,17 +1,18 @@
 import { Flex, useMediaQuery } from "@chakra-ui/react";
-import { RepositoryInfoResponse, UserResponse } from "../../../utils/types";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import UserInfoSuccess from "./user-info-success";
 import LanguageData from "./language-data";
 import LanguageDataSkeleton from "./language-data-skeleton";
 import UserInfoSkeleton from "./user-info-skeleton";
 import UserInfoError from "./user-info-error";
 import LanguageDataError from "./language-data-error";
-
-export interface Repository {
-  size: number;
-  language: string;
-}
+import {
+  Repository,
+  RepositoryInfoResponse,
+  UserResponse,
+} from "src/utils/types";
 
 const UserInfo = ({
   user,
@@ -26,41 +27,45 @@ const UserInfo = ({
   isError: boolean;
   isSuccessForUserInfo: boolean;
 }) => {
+  const { t } = useTranslation();
   const [isLargerThan600] = useMediaQuery("(min-width: 600px)");
 
   const [data, setData] = useState<Repository[]>([]);
+
+  const processData = useCallback(
+    (data: Repository[]): Repository[] => {
+      const languageSizes = new Map<string, number>();
+      let totalSize = 0;
+
+      data.forEach((repo) => {
+        totalSize += repo.size;
+        const language = repo.language || t("error.unrecognized");
+        if (languageSizes.has(language)) {
+          languageSizes.set(language, languageSizes.get(language)! + repo.size);
+        } else {
+          languageSizes.set(language, repo.size);
+        }
+      });
+
+      const aggregatedData: Repository[] = [];
+      languageSizes.forEach((size, language) => {
+        const percentage = (size / totalSize) * 100;
+        aggregatedData.push({ size: percentage, language });
+      });
+
+      aggregatedData.sort((a, b) => b.size - a.size);
+
+      return aggregatedData;
+    },
+    [t]
+  );
 
   useEffect(() => {
     if (repos) {
       const processedData = processData(repos);
       setData(processedData);
     }
-  }, [repos]);
-
-  const processData = (data: Repository[]): Repository[] => {
-    const languageSizes = new Map<string, number>();
-    let totalSize = 0;
-
-    data.forEach((repo) => {
-      totalSize += repo.size;
-      const language = repo.language || "Unrecognized";
-      if (languageSizes.has(language)) {
-        languageSizes.set(language, languageSizes.get(language)! + repo.size);
-      } else {
-        languageSizes.set(language, repo.size);
-      }
-    });
-
-    const aggregatedData: Repository[] = [];
-    languageSizes.forEach((size, language) => {
-      const percentage = (size / totalSize) * 100;
-      aggregatedData.push({ size: percentage, language });
-    });
-
-    aggregatedData.sort((a, b) => b.size - a.size);
-
-    return aggregatedData;
-  };
+  }, [repos, processData]);
 
   return (
     <Flex

@@ -6,13 +6,14 @@ import {
   Text,
   useMediaQuery,
 } from "@chakra-ui/react";
-import Link from "../../ui/link";
-import { UserResponse } from "../../../utils/types";
 import { useTranslation } from "react-i18next";
+
+import Link from "src/components/ui/link";
+import { UserResponse } from "src/utils/types";
 
 const UserInfoSuccess = ({ user }: { user: UserResponse }) => {
   const [isLargerThan600] = useMediaQuery("(min-width: 600px)");
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const {
     name,
     created_at,
@@ -58,7 +59,8 @@ const UserInfoSuccess = ({ user }: { user: UserResponse }) => {
         as={"span"}
         fontSize={"md"}
         mb={2}>
-        Joined on {new Date(created_at).toLocaleDateString(i18n.language)}
+        {t("userInfo.joinedAt")}{" "}
+        {new Date(created_at).toLocaleDateString(i18n.language)}
       </Text>
       <Flex
         flexDirection={{ base: "row", md: "column", lg: "row" }}

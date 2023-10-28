@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useParams } from "react-router-dom";
-import { useGetUserAuto, useGetUserRepos } from "../../services/userServices";
+
+import { useGetUserAuto, useGetUserRepos } from "src/services/userServices";
 import UserInfo from "./user-info/user-info";
 import RepoList from "./repo-list/repo-list";
 import NotFoundModal from "./not-found-modal";

@@ -1,7 +1,6 @@
-import React from "react";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import useBreadcrumbs from "../hooks/useBreadcrumbs";
+import useBreadcrumbs from "src/hooks/useBreadcrumbs";
 
 const Breadcrumbs = () => {
   const { previousTitle, title } = useBreadcrumbs();

@@ -11,10 +11,13 @@ import {
   Box,
   useMediaQuery,
 } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
+
 import colors from "./langColors.json";
-import { Repository } from "./user-info";
+import { Repository } from "src/utils/types";
 
 const LanguageData = ({ data }: { data: Repository[] }) => {
+  const { t } = useTranslation();
   const [isLargerThan650] = useMediaQuery("(min-width: 650px)");
   const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
   return (
@@ -42,7 +45,7 @@ const LanguageData = ({ data }: { data: Repository[] }) => {
               {data.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
-                  fill={colors[entry.language]}
+                  fill={(colors as Record<string, string>)[entry.language]}
                 />
               ))}
             </Pie>
@@ -55,14 +58,14 @@ const LanguageData = ({ data }: { data: Repository[] }) => {
           variant="simple">
           <Thead>
             <Tr>
-              <Th>Language</Th>
-              <Th isNumeric>Contribution</Th>
+              <Th>{t("languageData.language")}</Th>
+              <Th isNumeric>{t("languageData.contribution")}</Th>
             </Tr>
           </Thead>
           <Tbody>
             {data?.map((item) => (
               <Tr
-                color={colors[item.language]}
+                color={(colors as Record<string, string>)[item.language]}
                 key={item.language + item.size}>
                 <Td>{item.language}</Td>
                 <Td isNumeric>{item.size.toFixed(2)}%</Td>

@@ -1,4 +1,4 @@
-import ResumeComponent from "../components/resume-components/resume";
+import ResumeComponent from "src/components/resume-components/resume";
 
 const Resume = () => {
   return (

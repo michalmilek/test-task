@@ -1,11 +1,13 @@
 import { Box, Heading, Link, Text, useColorMode } from "@chakra-ui/react";
-import React from "react";
+import { useTranslation } from "react-i18next";
+
 import RecentSearches from "./recent-searches/recent-searches";
 import FindUserForm from "./find-user-form/find-user-form";
 
 const HomePageContent = () => {
   const { colorMode } = useColorMode();
   const bgColor = colorMode === "light" ? "gray.100" : "gray.500";
+  const { t } = useTranslation();
 
   return (
     <Box
@@ -26,21 +28,19 @@ const HomePageContent = () => {
         textAlign="center"
         textDecoration={"underline"}
         my={4}>
-        Welcome to Github Resume Checker!
+        {t("formHeading.welcomeMessage")}
       </Heading>
       <Text
         textAlign={"center"}
         fontSize={{ base: "md", sm: "lg" }}>
-        This is a project made for a test assignment. The website was modelled
-        on{" "}
+        {t("formHeading.projectDescription")}{" "}
         <Link
           textDecoration={"underline"}
           href="https://resume.github.io/">
           resume.github.io
         </Link>
         .<br />
-        Everything what you have to do is write your username in the input
-        field.
+        {t("formHeading.instruction")}
       </Text>
       <FindUserForm />
 

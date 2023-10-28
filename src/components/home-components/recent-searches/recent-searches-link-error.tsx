@@ -1,6 +1,8 @@
 import { GridItem, Text } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
 
 const RecentSearchesLinkError = () => {
+  const { t } = useTranslation();
   return (
     <GridItem
       display={{ base: "grid", md: "flex" }}
@@ -23,7 +25,7 @@ const RecentSearchesLinkError = () => {
         alignItems="center"
         justifyContent="center"
         fontSize={{ base: "2xl", sm: "4xl" }}>
-        Error
+        {t("error.error")}
       </Text>
       <Text
         gridColumn={2}
@@ -37,7 +39,7 @@ const RecentSearchesLinkError = () => {
         alignItems="center"
         justifyContent="center"
         fontSize={{ base: "sm", sm: "md" }}>
-        Something went wrong. Please try again later.
+        {t("error.failedLoad2")}
       </Text>
     </GridItem>
   );

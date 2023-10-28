@@ -197,5 +197,6 @@
   "XC": "#99DA07",
   "XQuery": "#5232e7",
   "Zephir": "#118f9e",
-  "Unrecognized": "#000"
+  "Unrecognized": "#000",
+  "Nie rozpoznano": "#000"
 }

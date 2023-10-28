@@ -153,3 +153,7 @@ export interface RepositoryDataCount {
 
 
 
+export interface Repository {
+  size: number;
+  language: string;
+}

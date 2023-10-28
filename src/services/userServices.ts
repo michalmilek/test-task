@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { getUser, getUserRepos, getUsers } from "./user";
 import { AxiosError } from "axios";
+
+import { getUser, getUserRepos, getUsers } from "./user";
 
 declare module "@tanstack/react-query" {
   interface Register {

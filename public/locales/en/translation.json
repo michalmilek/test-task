@@ -1,3 +1,73 @@
 {
-  "welcome": "Welcome"
+  "header": {
+    "back": "Back",
+    "switchToEN": "Switch to English",
+    "switchToPL": "Switch to Polish",
+    "changeTheme": "Change theme site",
+    "darkMode": "Dark mode",
+    "lightTheme": "Light mode"
+  },
+  "breadcrumbs": {
+    "home": "Home"
+  },
+  "formHeading": {
+    "welcomeMessage": "Welcome to Github Resume Checker!",
+    "projectDescription": "This is a project made for a test assignment. The website was modelled on",
+    "instruction": "Everything what you have to do is write your username in the input field."
+  },
+  "formFields": {
+    "usernameLabel": "Username",
+    "usernamePlaceholder": "Enter username",
+    "searchButton": "Generate",
+    "usernameRequiredError": "Username is required",
+    "ariaLabel": "Search for a user"
+  },
+  "recentSearches": {
+    "recentSearches": "Recent searches"
+  },
+  "userInfo": {
+    "joinedAt": "Joined at "
+  },
+  "languageData": {
+    "language": "Language",
+    "contribution": "Contribution"
+  },
+  "repoList": {
+    "repositories": "Repositories",
+    "howToUse": "How to use table?",
+    "tableAdditionalInformations": "Table additional informations",
+    "tableDescription": "If you want to sort the data in a table, press on the element describing the column."
+  },
+  "table": {
+    "name": "Name",
+    "description": "Description",
+    "language": "Language",
+    "created_At": "Created at",
+    "updated_At": "Updated",
+    "stargazersCount": "Stars",
+    "watchersCount": "Watchers",
+    "openIssuesCount": "Open issues",
+    "htmlURL": "HTML URL",
+    "cloneURL": "Clone URL",
+    "visit": "Visit",
+    "clone": "Clone"
+  },
+  "modal": {
+    "notFound": "User not found",
+    "description": "The user with the specified username does not exist. You will be redirected back to the home page within {{countdown}} seconds.",
+    "redirect": "Redirect now"
+  },
+  "wrongPage": {
+    "error": "Oops! Wrong page.",
+    "notExist": "The page you are looking for does not exist.",
+    "redirect": "You will be redirected to the home page in {{countdown}} seconds.",
+    "click": "Click to redirect now."
+  },
+  "error": {
+    "failedLoad": "Error: Failed to load data.",
+    "unrecognized": "Unrecognized",
+    "repositories": "Error during fetching repositories.",
+    "error": "Error",
+    "failedLoad2": "Failed to load data."
+  }
 }

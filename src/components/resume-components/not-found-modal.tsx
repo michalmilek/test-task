@@ -9,8 +9,11 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+
+import { routesOb } from "src/router/routes";
 
 const NotFoundModal = ({
   isError,
@@ -19,13 +22,14 @@ const NotFoundModal = ({
   isError: boolean;
   errorStatus: number | null | undefined;
 }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [countdown, setCountdown] = useState(5);
 
   const handleModalClose = useCallback(() => {
     onClose();
-    navigate("/");
+    navigate(routesOb.home.path);
   }, [navigate, onClose]);
 
   useEffect(() => {
@@ -63,19 +67,16 @@ const NotFoundModal = ({
         onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader color={"red"}>User not found</ModalHeader>
+          <ModalHeader color={"red"}>{t("modal.notFound")}</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-            The user with the specified username does not exist. You will be
-            redirected back to the home page within {countdown} seconds.
-          </ModalBody>
+          <ModalBody>{t("modal.description", { countdown })}</ModalBody>
 
           <ModalFooter>
             <Button
               autoFocus
               onClick={handleModalClose}
               colorScheme="red">
-              Redirect now
+              {t("modal.redirect")}
             </Button>
           </ModalFooter>
         </ModalContent>

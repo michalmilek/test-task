@@ -1,4 +1,4 @@
-import { Flex, Link, Heading, Text, Button, Skeleton } from "@chakra-ui/react";
+import { Flex, Link, Button, Skeleton } from "@chakra-ui/react";
 
 const UserInfoSkeleton = () => {
   return (

@@ -1,24 +1,19 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, useToast } from "@chakra-ui/react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import { routes } from "./router/routes";
 import theme from "./theme/theme";
 import { Suspense } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  QueryCache,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import useDynamicTitle from "./hooks/useDynamicTitle";
 import Header from "./components/header";
 import WrongPage from "./components/resume-components/wrong-page";
 import LoadingComponent from "./components/ui/global-loader";
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5000,
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-    },
-  },
-});
+import { useState } from "react";
 
 function Layout() {
   return (
@@ -30,6 +25,33 @@ function Layout() {
 }
 
 function App() {
+  const toast = useToast();
+  const [queryClient] = useState(
+    new QueryClient({
+      defaultOptions: {
+        queries: {
+          staleTime: 5000,
+          refetchOnMount: false,
+          refetchOnWindowFocus: false,
+        },
+      },
+      queryCache: new QueryCache({
+        onError: (error) => {
+          if (error.response?.status === 500) {
+            toast({
+              title: "Internal server error",
+              description:
+                "Please contact with administrator or try again later.",
+              status: "error",
+              duration: 6000,
+              isClosable: true,
+            });
+          }
+        },
+      }),
+    })
+  );
+
   useDynamicTitle();
   return (
     <QueryClientProvider client={queryClient}>

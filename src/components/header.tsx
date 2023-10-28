@@ -11,9 +11,10 @@ import { ArrowBackIcon, SunIcon } from "@chakra-ui/icons";
 import { useMemo } from "react";
 
 import Button from "./ui/button";
-import { Language } from "../utils/types";
+import { Language } from "src/utils/types";
 import { useLocation, useNavigate } from "react-router-dom";
 import Breadcrumbs from "./breadcrumbs";
+import { routesOb } from "src/router/routes";
 
 function Header() {
   const [isLargerThan550] = useMediaQuery("(min-width: 550px)");
@@ -25,7 +26,7 @@ function Header() {
     () => location.pathname !== "/",
     [location.pathname]
   );
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   const changeLanguage = (lng: Language) => {
     i18n.changeLanguage(lng);
@@ -44,9 +45,9 @@ function Header() {
         {isBackBtnVisible && (
           <ChakraButton
             fontSize={{ base: "sm", md: "lg" }}
-            onClick={() => navigate("/")}
+            onClick={() => navigate(routesOb.home.path)}
             leftIcon={<ArrowBackIcon fontSize={"2xl"} />}>
-            Back
+            {t("header.back")}
           </ChakraButton>
         )}
 
@@ -56,13 +57,13 @@ function Header() {
       <Flex gap={{ base: "1", md: "2" }}>
         <ChakraButton
           fontSize={{ base: "2xs", md: "lg" }}
-          aria-label="Switch to English"
+          aria-label={t("header.switchToEN")}
           onClick={() => changeLanguage("en")}>
           EN
         </ChakraButton>
         <ChakraButton
           fontSize={{ base: "2xs", md: "lg" }}
-          aria-label="Przełącz na polski"
+          aria-label={t("header.switchToPL")}
           onClick={() => changeLanguage("pl")}>
           PL
         </ChakraButton>
@@ -71,12 +72,14 @@ function Header() {
           alignItems={"center"}
           gap={2}
           fontSize={{ base: "sm", md: "lg" }}
-          aria-label="Change theme site"
+          aria-label={t("header.changeTheme")}
           onClick={toggleColorMode}>
           <SunIcon />
           {isLargerThan550 && (
             <chakra.span>
-              {colorMode === "light" ? "Dark mode" : "Light mode"}
+              {colorMode === "light"
+                ? t("header.darkMode")
+                : t("header.lightTheme")}
             </chakra.span>
           )}
         </Button>

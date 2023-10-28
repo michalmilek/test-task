@@ -6,23 +6,24 @@ import {
   useToast,
   chakra,
 } from "@chakra-ui/react";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import Button from "../../ui/button";
-import Input from "../../ui/input";
-import { useGetUserManual } from "../../../services/userServices";
 import { useNavigate } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+
+import Button from "src/components/ui/button";
+import Input from "src/components/ui/input";
+import { useGetUserManual } from "src/services/userServices";
+import { useFormValidation } from "./useFormValidation";
+import { routesOb } from "src/router/routes";
 
 interface FormInterface {
   username: string;
 }
 
-const schema = yup.object().shape({
-  username: yup.string().required("Username is required"),
-});
-
 const FindUserForm = () => {
+  const { schema } = useFormValidation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const {
     control,
@@ -59,7 +60,7 @@ const FindUserForm = () => {
           JSON.stringify(previousSearchArray)
         );
 
-        return navigate(`/resume/${data.login}`);
+        return navigate(routesOb.resumeToUse.path + "/" + data.login);
       }
     });
   };
@@ -85,20 +86,19 @@ const FindUserForm = () => {
         <FormLabel
           fontSize={{ base: "md", md: "xl" }}
           htmlFor="username">
-          Username
+          {t("formFields.usernameLabel")}
         </FormLabel>
         <Controller
           name="username"
           control={control}
-          rules={{ required: "Username is required" }}
           render={({ field }) => (
             <Input
               id="username"
-              placeholder="Enter username"
+              placeholder={t("formFields.usernamePlaceholder")}
               value={field.value}
               onChange={field.onChange}
               onBlur={field.onBlur}
-              aria-label="Search for a user"
+              aria-label={t("formFields.ariaLabel")}
               aria-invalid={!!errors.username}
               aria-describedby="username-error"
               fontSize={{ base: "md", md: "xl" }}
@@ -117,7 +117,7 @@ const FindUserForm = () => {
         mt={4}
         isLoading={isSubmitting || isFetching}
         type="submit">
-        Generate
+        {t("formFields.searchButton")}
       </Button>
     </chakra.form>
   );

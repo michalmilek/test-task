@@ -1,4 +1,4 @@
-import { RepositoryInfoResponse, UserResponse } from "../utils/types";
+import { RepositoryInfoResponse, UserResponse } from "utils/types";
 import axiosInstance from "./axios";
 
 export const getUser = async (username: string) => {

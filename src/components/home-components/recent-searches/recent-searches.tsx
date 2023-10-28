@@ -1,29 +1,18 @@
-import { useEffect } from "react";
-import { Box, Grid, Heading, useToast } from "@chakra-ui/react";
-import { useGetUsers } from "../../../services/userServices";
+import { Box, Grid, Heading } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
+
+import { useGetUsers } from "src/services/userServices";
 import RecentSearchLink from "./recent-searches-link";
 import RecentSearchesLinkSkeleton from "./recent-searches-link-skeleton";
 import RecentSearchesLinkError from "./recent-searches-link-error";
 
 const RecentSearches = () => {
+  const { t } = useTranslation();
   const users: string[] = JSON.parse(
     localStorage.getItem("previousSearchArray") || "[]"
   );
 
-  const { data, isError, isLoading, isSuccess, error } = useGetUsers(users);
-  const toast = useToast();
-
-  useEffect(() => {
-    if (error?.response?.status === 500) {
-      toast({
-        title: "Internal server error",
-        description: "Github API error",
-        status: "error",
-        duration: 6000,
-        isClosable: true,
-      });
-    }
-  }, [toast, error?.response?.status]);
+  const { data, isError, isLoading, isSuccess } = useGetUsers(users);
 
   return (
     <Box mt={"10"}>
@@ -31,7 +20,7 @@ const RecentSearches = () => {
         mb={"10"}
         textAlign={"center"}
         as={"h2"}>
-        Recent searches
+        {t("recentSearches.recentSearches")}
       </Heading>
       <Grid
         px={"10"}
@@ -52,7 +41,7 @@ const RecentSearches = () => {
           data?.map((user) => (
             <RecentSearchLink
               user={user}
-              key={user.id}
+              key={user.id + "recent searches"}
             />
           ))}
       </Grid>

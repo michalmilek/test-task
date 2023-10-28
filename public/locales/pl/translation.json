@@ -1,3 +1,73 @@
 {
-  "welcome": "Welcome"
+  "header": {
+    "back": "Wróć",
+    "switchToEN": "Przełącz na angielski",
+    "switchToPL": "Przełącz na polski",
+    "changeTheme": "Zmień kolor strony",
+    "darkMode": "Tryb ciemny",
+    "lightTheme": "Tryb jasny"
+  },
+  "breadcrumbs": {
+    "home": "Strona główna"
+  },
+  "formHeading": {
+    "welcomeMessage": "Witaj w Github Resume Checker!",
+    "projectDescription": "Jest to projekt stworzony w ramach testowego zadania. Strona została wzorowana na",
+    "instruction": "Wszystko, co musisz zrobić, to wpisać swoją nazwę użytkownika w polu nazwy użytkownika."
+  },
+  "formFields": {
+    "usernameLabel": "Nazwa użytkownika",
+    "usernamePlaceholder": "Wprowadź nazwę użytkownika",
+    "searchButton": "Generuj",
+    "usernameRequiredError": "Nazwa użytkownika jest wymagana",
+    "ariaLabel": "Wyszukaj użytkownika"
+  },
+  "recentSearches": {
+    "recentSearches": "Ostatnie wyszukiwania"
+  },
+  "userInfo": {
+    "joinedAt": "Dołączył "
+  },
+  "languageData": {
+    "language": "Język",
+    "contribution": "Udział"
+  },
+  "repoList": {
+    "repositories": "Repozytoria",
+    "howToUse": "Jak korzystać z tabeli?",
+    "tableAdditionalInformations": "Dodatkowe informacje o tabeli",
+    "tableDescription": "Jeśli chcesz posortować dane w tabeli, naciśnij element opisujący kolumnę."
+  },
+  "table": {
+    "name": "Nazwa",
+    "description": "Opis",
+    "language": "Język",
+    "created_At": "Utworzone",
+    "updated_At": "Aktualizacja",
+    "stargazersCount": "Gwiazdek",
+    "watchersCount": "Obserwujący",
+    "openIssuesCount": "Otwarte problemy",
+    "htmlURL": "Adres HTML",
+    "cloneURL": "Adres do sklonowania",
+    "visit": "Odwiedź",
+    "clone": "Sklonuj"
+  },
+  "modal": {
+    "notFound": "Nie znaleziono użytkownika",
+    "description": "Użytkownik po danej nazwie nie istnieje. Zostaniesz przekierowany na stronę główną w ciągu {{countdown}} sekund.",
+    "redirect": "Przejdź od razu"
+  },
+  "wrongPage": {
+    "error": "Ups! Nie ma takiej strony.",
+    "notExist": "Strona, której szukasz nie istnieje.",
+    "redirect": "Zostaniesz przekierowany na stronę główną w ciągu {{countdown}} sekund.",
+    "click": "Przejdź od razu"
+  },
+  "error": {
+    "failedLoad": "Błąd: Nie udało się załadować danych.",
+    "unrecognized": "Nie rozpoznano",
+    "repositories": "Błąd podczas pobierania repozytoriów.",
+    "error": "Błąd",
+    "failedLoad2": "Nie udało się załadować danych."
+  }
 }

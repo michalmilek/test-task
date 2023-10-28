@@ -11,7 +11,9 @@ import {
   PopoverArrow,
   PopoverCloseButton,
 } from "@chakra-ui/react";
-import { RepositoryInfoResponse } from "../../../utils/types";
+import { useTranslation } from "react-i18next";
+
+import { RepositoryInfoResponse } from "src/utils/types";
 import ReposTable from "./repos-table";
 import ReposTableSkeleton from "./repos-table-skeleton";
 import ReposTableError from "./repos-table-error";
@@ -26,8 +28,9 @@ const RepoList = ({
   repos: RepositoryInfoResponse[] | undefined;
   isLoading: boolean;
   isError: boolean;
-  isSuccess: Repos;
+  isSuccess: boolean;
 }) => {
+  const { t } = useTranslation();
   return (
     <Box mt={8}>
       <Flex
@@ -35,19 +38,18 @@ const RepoList = ({
         gap={4}
         my={6}
         ml={4}>
-        <Heading as={"h1"}>Repositories</Heading>
+        <Heading as={"h1"}>{t("repoList.repositories")}</Heading>
         <Popover>
           <PopoverTrigger>
-            <Button>How to use table?</Button>
+            <Button>{t("repoList.howToUse")}</Button>
           </PopoverTrigger>
           <PopoverContent>
             <PopoverArrow />
             <PopoverCloseButton />
-            <PopoverHeader>Table additional informations</PopoverHeader>
-            <PopoverBody>
-              If you want to sort the data in a table, press on the element
-              describing the column.
-            </PopoverBody>
+            <PopoverHeader>
+              {t("repoList.tableAdditionalInformations")}
+            </PopoverHeader>
+            <PopoverBody>{t("repoList.tableDescription")}</PopoverBody>
           </PopoverContent>
         </Popover>
       </Flex>

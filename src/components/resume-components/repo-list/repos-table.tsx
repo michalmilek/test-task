@@ -17,15 +17,14 @@ import {
   chakra,
   Button,
 } from "@chakra-ui/react";
-import React, { useMemo } from "react";
-import { RepositoryInfoResponse } from "../../../utils/types";
-import { columns as columns2 } from "./table-creation";
+import React from "react";
 
-import "@tanstack/react-table";
+import { RepositoryInfoResponse } from "src/utils/types";
+import { useTableCreation } from "./table-creation";
 
 const ReposTable = ({ repos }: { repos: RepositoryInfoResponse[] }) => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const columns = useMemo(() => columns2, []);
+  const { columns } = useTableCreation();
 
   const table = useReactTable({
     columns,

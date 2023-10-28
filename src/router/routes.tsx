@@ -1,13 +1,24 @@
-import Home from "../pages/Home";
-import Resume from "../pages/Resume";
+import Home from "src/pages/Home";
+import Resume from "src/pages/Resume";
 
-export const routes = [
-  {
-    path: "/",
-    component: <Home />,
-  },
-  {
-    path: "/resume/:username",
-    component: <Resume />,
-  },
-];
+const home = {
+  path: "/",
+  component: <Home />,
+};
+
+const resumeToUse = {
+  path: "/resume",
+  component: <Resume />,
+};
+
+const resume = {
+  path: "/resume/:username",
+  component: <Resume />,
+};
+
+export const routesOb = {
+  home,
+  resumeToUse,
+};
+
+export const routes = [home, resume];

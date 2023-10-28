@@ -1,15 +1,14 @@
 import {
   Box,
-  Grid,
   GridItem,
-  Heading,
   Image,
   Link,
   Text,
   useColorMode,
 } from "@chakra-ui/react";
-import { UserResponse } from "../../../utils/types";
 import { Link as RouterLink } from "react-router-dom";
+
+import { UserResponse } from "src/utils/types";
 
 const RecentSearchLink = ({ user }: { user: UserResponse }) => {
   const { colorMode } = useColorMode();
