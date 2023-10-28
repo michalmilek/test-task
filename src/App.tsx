@@ -7,6 +7,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import useDynamicTitle from "./hooks/useDynamicTitle";
 import Header from "./components/header";
+import WrongPage from "./components/resume-components/wrong-page";
+import LoadingComponent from "./components/ui/global-loader";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,21 +33,23 @@ function App() {
   useDynamicTitle();
   return (
     <QueryClientProvider client={queryClient}>
-      <ChakraProvider theme={theme}>
-        <Routes>
+      <Routes>
+        <Route
+          path="/"
+          element={<Layout />}>
+          {routes.map((route) => (
+            <Route
+              key={route.path}
+              path={route.path}
+              element={route.component}
+            />
+          ))}
           <Route
-            path="/"
-            element={<Layout />}>
-            {routes.map((route) => (
-              <Route
-                key={route.path}
-                path={route.path}
-                element={route.component}
-              />
-            ))}
-          </Route>
-        </Routes>
-      </ChakraProvider>
+            path="*"
+            element={<WrongPage />}
+          />
+        </Route>
+      </Routes>
       <ReactQueryDevtools />
     </QueryClientProvider>
   );
@@ -53,11 +57,13 @@ function App() {
 
 const SuspenseApp = () => {
   return (
-    <Suspense fallback="loading">
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Suspense>
+    <ChakraProvider theme={theme}>
+      <Suspense fallback={<LoadingComponent />}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Suspense>
+    </ChakraProvider>
   );
 };
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import {
   Table,
@@ -15,9 +14,8 @@ import {
 import colors from "./langColors.json";
 import { Repository } from "./user-info";
 
-const Example = ({ data }: { data: Repository[] }) => {
+const LanguageData = ({ data }: { data: Repository[] }) => {
   const [isLargerThan650] = useMediaQuery("(min-width: 650px)");
-  const [isLargerThan600] = useMediaQuery("(min-width: 650px)");
   const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
   return (
     <Flex
@@ -77,4 +75,4 @@ const Example = ({ data }: { data: Repository[] }) => {
   );
 };
 
-export default Example;
+export default LanguageData;

@@ -23,7 +23,6 @@ import { columns as columns2 } from "./table-creation";
 
 import "@tanstack/react-table";
 
-
 const ReposTable = ({ repos }: { repos: RepositoryInfoResponse[] }) => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const columns = useMemo(() => columns2, []);

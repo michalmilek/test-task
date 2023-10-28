@@ -41,7 +41,9 @@ export const columns = [
   }),
   columnHelper.accessor("stargazers_count", {
     header: () => (
-      <Tooltip label="Stargazers Count">
+      <Tooltip
+        as={"span"}
+        label="Stargazers Count">
         <Icon
           ml={3}
           w={"full"}
@@ -56,7 +58,9 @@ export const columns = [
   }),
   columnHelper.accessor("watchers_count", {
     header: () => (
-      <Tooltip label="Watchers Count">
+      <Tooltip
+        as={"span"}
+        label="Watchers Count">
         <Icon
           ml={3}
           w={"full"}
@@ -71,7 +75,9 @@ export const columns = [
   }),
   columnHelper.accessor("open_issues_count", {
     header: () => (
-      <Tooltip label="Open Issues Count">
+      <Tooltip
+        as={"span"}
+        label="Open Issues Count">
         <Icon
           ml={3}
           w={"full"}
@@ -91,13 +97,5 @@ export const columns = [
   columnHelper.accessor("clone_url", {
     header: "Clone URL",
     cell: (info) => <Link to={info.getValue()}>Clone</Link>,
-  }),
-  columnHelper.accessor("commits_url", {
-    header: "Commits URL ",
-    cell: (info) => <Link to={info.getValue()}>Redirect to commits</Link>,
-  }),
-  columnHelper.accessor("branches_url", {
-    header: "Branches URL ",
-    cell: (info) => <Link to={info.getValue()}>Redirect to branches</Link>,
   }),
 ];

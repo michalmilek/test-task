@@ -12,9 +12,22 @@ import {
   PopoverCloseButton,
 } from "@chakra-ui/react";
 import { RepositoryInfoResponse } from "../../../utils/types";
-import ReposTable from "./table";
+import ReposTable from "./repos-table";
+import ReposTableSkeleton from "./repos-table-skeleton";
+import ReposTableError from "./repos-table-error";
+import ReposNoRepos from "./repos-no-repos";
 
-const RepoList = ({ repos }: { repos: RepositoryInfoResponse[] }) => {
+const RepoList = ({
+  repos,
+  isLoading,
+  isError,
+  isSuccess,
+}: {
+  repos: RepositoryInfoResponse[] | undefined;
+  isLoading: boolean;
+  isError: boolean;
+  isSuccess: Repos;
+}) => {
   return (
     <Box mt={8}>
       <Flex
@@ -38,7 +51,10 @@ const RepoList = ({ repos }: { repos: RepositoryInfoResponse[] }) => {
           </PopoverContent>
         </Popover>
       </Flex>
-      <ReposTable repos={repos} />
+      {isError && <ReposTableError />}
+      {isLoading && <ReposTableSkeleton />}
+      {isSuccess && repos && repos.length > 0 && <ReposTable repos={repos} />}
+      {isSuccess && repos && repos.length === 0 && <ReposNoRepos />}
     </Box>
   );
 };

@@ -1,17 +1,12 @@
 import React from "react";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-} from "@chakra-ui/react";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import useBreadcrumbs from "../hooks/useBreadcrumbs";
 
 const Breadcrumbs = () => {
   const { previousTitle, title } = useBreadcrumbs();
   return (
-    <Breadcrumb fontSize={"lg"}>
+    <Breadcrumb fontSize={{ base: "xs", sm: "sm", md: "lg" }}>
       {previousTitle && (
         <BreadcrumbItem>
           <BreadcrumbLink

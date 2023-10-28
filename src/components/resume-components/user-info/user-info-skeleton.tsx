@@ -24,26 +24,19 @@ const UserInfoSkeleton = () => {
         />
       </Link>
 
-      <Heading
-        as={"h2"}
-        fontWeight="bold"
-        fontSize={"lg"}
-        mb={2}>
-        <Skeleton
-          height="1em"
-          width="8em"
-        />
-      </Heading>
-      <Text
-        fontSize={"md"}
-        mb={2}>
-        <Skeleton
-          height="1em"
-          width="10em"
-        />
-      </Text>
+      <Skeleton
+        mb={2}
+        height="1em"
+        width="8em"
+      />
+      <Skeleton
+        mb={2}
+        height="1em"
+        width="10em"
+      />
+
       <Flex
-        flexDirection={{ base: "row", md: "column", lg: "row" }}
+        flexDirection={{ base: "row", sm: "column", lg: "row" }}
         gap={4}
         alignItems={"center"}
         justifyContent={"center"}>

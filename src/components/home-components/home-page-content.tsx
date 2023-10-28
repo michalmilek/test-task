@@ -13,7 +13,7 @@ const HomePageContent = () => {
       mx="auto"
       maxW={{ base: "md", sm: "xl", md: "6xl" }}
       w={"auto"}
-      mt={8}
+      my={8}
       p={4}
       bg={bgColor}
       borderWidth="1px"

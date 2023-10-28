@@ -1,30 +1,63 @@
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useGetUserAuto, useGetUserRepos } from "../../services/userServices";
 import UserInfo from "./user-info/user-info";
-import Chart from "./user-info/chart";
-import Example from "./user-info/chart";
 import RepoList from "./repo-list/repo-list";
+import NotFoundModal from "./not-found-modal";
 
 const ResumeComponent = () => {
   const { username } = useParams();
-  const { data: user } = useGetUserAuto(username);
-  const { data: repos } = useGetUserRepos(username);
-  console.log("🚀 ~ repos:", repos);
+  const {
+    data: user,
+    isLoading: isLoadingUser,
+    isError: isErrorUser,
+    isSuccess: isSuccessUser,
+    error,
+  } = useGetUserAuto(username);
+  const {
+    data: repos,
+    isLoading: isLoadingRepos,
+    isError: isErrorRepos,
+    isSuccess: isSuccessRepos,
+  } = useGetUserRepos(username);
 
-  if (user && repos) {
-    return (
-      <div>
-        <UserInfo
-          repos={repos}
-          user={user}
-        />
-        <RepoList repos={repos} />
-      </div>
-    );
-  }
+  const isLoadingForUserInfo = useMemo(
+    () => isLoadingUser || isLoadingRepos,
+    [isLoadingRepos, isLoadingUser]
+  );
 
-  return null;
+  const isErrorForUserInfo = useMemo(
+    () => isErrorUser || isErrorRepos,
+    [isErrorUser, isErrorRepos]
+  );
+
+  const isSuccessForUserInfo = useMemo(
+    () => isSuccessUser && isSuccessRepos,
+    [isSuccessUser, isSuccessRepos]
+  );
+
+  return (
+    <>
+      <UserInfo
+        repos={repos}
+        user={user}
+        isLoading={isLoadingForUserInfo}
+        isError={isErrorForUserInfo}
+        isSuccessForUserInfo={isSuccessForUserInfo}
+      />
+      <RepoList
+        isLoading={isLoadingRepos}
+        isError={isErrorRepos}
+        isSuccess={isSuccessRepos}
+        repos={repos}
+      />
+
+      <NotFoundModal
+        errorStatus={error ? error.response?.status : null}
+        isError={isErrorUser}
+      />
+    </>
+  );
 };
 
 export default ResumeComponent;

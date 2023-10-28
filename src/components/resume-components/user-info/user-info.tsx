@@ -1,16 +1,12 @@
-import {
-  Button,
-  Flex,
-  Heading,
-  Image,
-  Text,
-  useMediaQuery,
-} from "@chakra-ui/react";
+import { Flex, useMediaQuery } from "@chakra-ui/react";
 import { RepositoryInfoResponse, UserResponse } from "../../../utils/types";
-import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import Example from "./chart";
-import Link from "../../ui/link";
+import UserInfoSuccess from "./user-info-success";
+import LanguageData from "./language-data";
+import LanguageDataSkeleton from "./language-data-skeleton";
+import UserInfoSkeleton from "./user-info-skeleton";
+import UserInfoError from "./user-info-error";
+import LanguageDataError from "./language-data-error";
 
 export interface Repository {
   size: number;
@@ -20,28 +16,25 @@ export interface Repository {
 const UserInfo = ({
   user,
   repos,
+  isLoading,
+  isError,
+  isSuccessForUserInfo,
 }: {
-  user: UserResponse;
-  repos: RepositoryInfoResponse[];
+  user: UserResponse | undefined;
+  repos: RepositoryInfoResponse[] | undefined;
+  isLoading: boolean;
+  isError: boolean;
+  isSuccessForUserInfo: boolean;
 }) => {
   const [isLargerThan600] = useMediaQuery("(min-width: 600px)");
-  const {
-    name,
-    created_at,
-    html_url,
-    twitter_username,
-    blog,
-    avatar_url,
-    login,
-  } = user;
-
-  const { i18n } = useTranslation();
 
   const [data, setData] = useState<Repository[]>([]);
 
   useEffect(() => {
-    const processedData = processData(repos);
-    setData(processedData);
+    if (repos) {
+      const processedData = processData(repos);
+      setData(processedData);
+    }
   }, [repos]);
 
   const processData = (data: Repository[]): Repository[] => {
@@ -71,6 +64,7 @@ const UserInfo = ({
 
   return (
     <Flex
+      as={"div"}
       w={"full"}
       alignItems={"center"}
       justifyContent={"center"}
@@ -80,81 +74,23 @@ const UserInfo = ({
       borderRadius="lg"
       overflow="hidden"
       p={{ base: 8, lg: 4 }}>
-      <Flex
-        flexDirection={"column"}
-        alignItems="center"
-        gap={isLargerThan600 ? "8" : "2"}
-        mb={4}>
-        <Image
-          src={avatar_url}
-          alt={login}
-          rounded={"lg"}
-          border={"2px solid"}
-          borderColor={"gray.400"}
-          shadow={"xl"}
-          boxSize={{ base: "100px", lg: "150px" }}
-          mr={2}
-        />
-        <Link
-          to={html_url}
-          isExternal
-          fontSize={{ sm: "2xl", lg: "5xl" }}>
-          {login}
-        </Link>
+      {isLoading && (
+        <>
+          <UserInfoSkeleton />
+          <LanguageDataSkeleton />
+        </>
+      )}
+      {isError && (
+        <>
+          <UserInfoError />
+          <LanguageDataError />
+        </>
+      )}
 
-        {name && (
-          <Heading
-            as={"h2"}
-            fontWeight="bold"
-            fontSize={"lg"}
-            mb={2}>
-            {name}
-          </Heading>
-        )}
-        <Text
-          fontSize={"md"}
-          mb={2}>
-          Joined on {new Date(created_at).toLocaleDateString(i18n.language)}
-        </Text>
-        <Flex
-          flexDirection={{ base: "row", md: "column", lg: "row" }}
-          gap={4}
-          alignItems={"center"}
-          justifyContent={"center"}>
-          <Link
-            to={html_url}
-            isExternal>
-            <Button
-              tabIndex={-1}
-              colorScheme="gray">
-              GitHub
-            </Button>
-          </Link>
-          {twitter_username && (
-            <Link
-              to={`https://twitter.com/${twitter_username}`}
-              isExternal>
-              <Button
-                tabIndex={-1}
-                colorScheme="twitter">
-                Twitter
-              </Button>
-            </Link>
-          )}
-          {blog && (
-            <Link
-              to={blog}
-              isExternal>
-              <Button
-                tabIndex={-1}
-                colorScheme="blue">
-                Portfolio
-              </Button>
-            </Link>
-          )}
-        </Flex>
-      </Flex>
-      {data.length > 0 && <Example data={data} />}
+      {isSuccessForUserInfo && user && data && <UserInfoSuccess user={user} />}
+      {isSuccessForUserInfo && user && data.length > 0 && (
+        <LanguageData data={data} />
+      )}
     </Flex>
   );
 };
