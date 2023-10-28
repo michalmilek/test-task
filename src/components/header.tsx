@@ -6,17 +6,22 @@ import {
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { ArrowBackIcon } from "@chakra-ui/icons";
+import { useMemo } from "react";
 
 import Button from "./ui/button";
 import { Language } from "../utils/types";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Breadcrumbs from "./breadcrumbs";
 
 function Header() {
   const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
   const bgColor = colorMode === "light" ? "gray.100" : "gray.500";
-
+  const location = useLocation();
+  const isBackBtnVisible = useMemo(
+    () => location.pathname !== "/",
+    [location.pathname]
+  );
   const { i18n } = useTranslation();
 
   const changeLanguage = (lng: Language) => {
@@ -25,6 +30,7 @@ function Header() {
 
   return (
     <Flex
+      key={location.pathname + "path"}
       as={"header"}
       bg={bgColor}
       shadow={"md"}
@@ -32,11 +38,14 @@ function Header() {
       <Flex
         gap={4}
         alignItems={"center"}>
-        <ChakraButton
-          onClick={() => navigate(-1)}
-          leftIcon={<ArrowBackIcon fontSize={"2xl"} />}>
-          Back
-        </ChakraButton>
+        {isBackBtnVisible && (
+          <ChakraButton
+            onClick={() => navigate("/")}
+            leftIcon={<ArrowBackIcon fontSize={"2xl"} />}>
+            Back
+          </ChakraButton>
+        )}
+
         <Breadcrumbs />
       </Flex>
       <Spacer />
