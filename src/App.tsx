@@ -1,6 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
-import "./index.css";
 import { routes } from "./router/routes";
 import theme from "./theme/theme";
 import { Suspense } from "react";
@@ -9,16 +8,20 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import useDynamicTitle from "./hooks/useDynamicTitle";
 import Header from "./components/header";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5000,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 function Layout() {
   return (
     <div>
       <Header />
-
-      {/* This element will render either <DashboardMessages> when the URL is
-          "/messages", <DashboardTasks> at "/tasks", or null if it is "/"
-      */}
       <Outlet />
     </div>
   );

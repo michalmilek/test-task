@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import { ColorModeScript } from "@chakra-ui/react";
 
 import SuspenseApp from "./App.tsx";
-import "./index.css";
 import theme from "./theme/theme.ts";
 import "./i18n.ts";
 

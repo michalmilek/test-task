@@ -26,7 +26,7 @@ const HomePageContent = () => {
         textAlign="center"
         textDecoration={"underline"}
         my={4}>
-        Welcome to Github Resume Maker!
+        Welcome to Github Resume Checker!
       </Heading>
       <Text
         textAlign={"center"}

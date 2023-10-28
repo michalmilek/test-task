@@ -4,6 +4,7 @@ import {
   FormLabel,
   FormErrorMessage,
   useToast,
+  chakra,
 } from "@chakra-ui/react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -76,8 +77,8 @@ const FindUserForm = () => {
   }, [error?.response?.status, toast]);
 
   return (
-    <form
-      className="mt-10"
+    <chakra.form
+      mt={10}
       role="search"
       onSubmit={handleSubmit(onSubmit)}>
       <FormControl isInvalid={!!errors.username}>
@@ -118,7 +119,7 @@ const FindUserForm = () => {
         type="submit">
         Generate
       </Button>
-    </form>
+    </chakra.form>
   );
 };
 

@@ -9,12 +9,15 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import { UserResponse } from "../../../utils/types";
+import { Link as RouterLink } from "react-router-dom";
 
 const RecentSearchLink = ({ user }: { user: UserResponse }) => {
   const { colorMode } = useColorMode();
   const bgHover = colorMode === "dark" ? "gray.400" : "gray.300";
   return (
-    <Link href={`/resume/${user.login}`}>
+    <Link
+      as={RouterLink}
+      to={`/resume/${user.login}`}>
       <GridItem
         gridRow={1}
         display={{ base: "grid", md: "flex" }}
