@@ -36,7 +36,7 @@
     "repositories": "Repozytoria",
     "howToUse": "Jak korzystać z tabeli?",
     "tableAdditionalInformations": "Dodatkowe informacje o tabeli",
-    "tableDescription": "Jeśli chcesz posortować dane w tabeli, naciśnij element opisujący kolumnę."
+    "tableDescription": "Jeśli chcesz posortować dane w tabeli, naciśnij element opisujący kolumnę. Aby przesunąć widok na resztę danych użyj scrolla na osi X."
   },
   "table": {
     "name": "Nazwa",

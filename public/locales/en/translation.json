@@ -36,7 +36,7 @@
     "repositories": "Repositories",
     "howToUse": "How to use table?",
     "tableAdditionalInformations": "Table additional informations",
-    "tableDescription": "If you want to sort the data in a table, press on the element describing the column."
+    "tableDescription": "If you want to sort the data in a table, press on the element describing the column. And if you want to check other information use scroll in X axis."
   },
   "table": {
     "name": "Name",

@@ -38,7 +38,7 @@ const ResumeComponent = () => {
   );
 
   return (
-    <>
+    <main>
       <UserInfo
         repos={repos}
         user={user}
@@ -57,7 +57,7 @@ const ResumeComponent = () => {
         errorStatus={error ? error.response?.status : null}
         isError={isErrorUser}
       />
-    </>
+    </main>
   );
 };
 

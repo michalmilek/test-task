@@ -29,6 +29,8 @@ const LanguageData = ({ data }: { data: Repository[] }) => {
         height={isLargerThan650 ? "300px" : "200px"}
         width={{ sm: "160px", md: "250px", lg: "350px" }}>
         <ResponsiveContainer
+          minHeight={"100px"}
+          minWidth={"150px"}
           width={"100%"}
           height={"100%"}>
           <PieChart
