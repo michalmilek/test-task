@@ -14,6 +14,10 @@ const RecentSearches = () => {
 
   const { data, isError, isLoading, isSuccess } = useGetUsers(users);
 
+  if (users.length === 0) {
+    return null;
+  }
+
   return (
     <Box mt={"10"}>
       <Heading

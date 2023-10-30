@@ -1,27 +1,56 @@
-# React + TypeScript + Vite
+## English Description
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Project Description
 
-Currently, two official plugins are available:
+This application was created as a test task. It is designed as a Single Page Application (SPA) with the main purpose of previewing the resume of a selected user from their GitHub profile. The application also keeps a history of the last 5 checks. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- The application, based on the search, immediately searches for the user in the github database and if there is one it goes to his profile, if not it displays a toast that such a user does not exist and the application goes no further.
+- The application displays the most commonly used programming languages by the user in the form of a table and a chart.
+- The application displays all data about the user's repositories in a table format, which can be sorted by clicking on the column labels.
+- Users can navigate through the application using keyboard controls.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies Used
 
-- Configure the top-level `parserOptions` property like this:
+- **Address Handling:** `react-router-dom`
+- **Styling:** `chakra ui`
+- **External Data Handling:** 
+  - `react query`
+  - `axios`
+- **Chart:** `recharts`
+- **Table:** `react-table`
+- **Form Handling:** 
+  - `react-hook-form`
+  - `yup`
+- **Internationalization:** `i18next`
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+## Polski opis
+
+# Opis Projektu
+
+Aplikacja została stworzona jako zadanie testowe. Jest to aplikacja typu Single Page Application (SPA), której głównym celem jest podgląd życiorysu wybranego użytkownika na podstawie jego profilu na GitHubie. Aplikacja zapisuje historię ostatnich 5 sprawdzeń.
+
+## Funkcje
+
+- Aplikacja na podstawie wyszukiwania od razu wyszukuje użytkownika w bazie githuba oraz jeśli profil istnieje to przechodzi na jego podgląd, jeśli nie to wyświetla się toast, że taki użytkownik nie istnieje i aplikacja nie przechodzi dalej.
+- Aplikacja wyświetla najczęściej wykorzystywane przez użytkownika języki programowania w formie tabeli oraz wykresu.
+- Aplikacja wyświetla wszystkie dane dotyczące repozytoriów użytkownika w formie tabeli, którą można sortować przez kliknięcie w etykietę kolumny.
+- Użytkownicy mogą nawigować po aplikacji za pomocą klawiszy.
+
+## Użyte Technologie
+
+- **Obsługa Adresu:** `react-router-dom`
+- **Stylowanie:** `chakra ui`
+- **Obsługa Danych Zewnętrznych:** 
+  - `react query`
+  - `axios`
+- **Wykres:** `recharts`
+- **Tabela:** `react-table`
+- **Obsługa Formularzy:** 
+  - `react-hook-form`
+  - `yup`
+- **Internacjonalizacja:** `i18next`
+
