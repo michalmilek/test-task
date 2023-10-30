@@ -1,4 +1,3 @@
-import React from "react";
 import {
   LinkProps as ChakraLinkProps,
   Link as ChakraLink,
@@ -16,7 +15,7 @@ const Link = (props: ChakraRouterLinkProps) => {
       textDecoration={"underline"}
       as={RouterLink}
       {...props}>
-      {props.children}{" "}
+      {props.children}
     </ChakraLink>
   );
 };
