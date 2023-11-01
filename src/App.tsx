@@ -1,7 +1,6 @@
+import { useState } from "react";
 import { ChakraProvider, useToast } from "@chakra-ui/react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
-import { routes } from "./router/routes";
-import theme from "./theme/theme";
 import { Suspense } from "react";
 import {
   QueryCache,
@@ -9,11 +8,13 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 import useDynamicTitle from "./hooks/useDynamicTitle";
 import Header from "./components/header";
-import WrongPage from "./components/resume-components/wrong-page";
 import LoadingComponent from "./components/ui/global-loader";
-import { useState } from "react";
+import { routes } from "./router/routes";
+import theme from "./theme/theme";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function Layout() {
   return (
@@ -68,7 +69,7 @@ function App() {
           ))}
           <Route
             path="*"
-            element={<WrongPage />}
+            element={<NotFoundPage />}
           />
         </Route>
       </Routes>

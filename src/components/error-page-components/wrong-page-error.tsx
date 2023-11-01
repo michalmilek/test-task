@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import Link from "src/components/ui/link";
 import { routesOb } from "src/router/routes";
 
-const WrongPage = () => {
+const WrongPageError = () => {
   const navigate = useNavigate();
   const [countdown, setCountdown] = useState(5);
   const { t } = useTranslation();
@@ -45,4 +45,4 @@ const WrongPage = () => {
   );
 };
 
-export default WrongPage;
+export default WrongPageError;
